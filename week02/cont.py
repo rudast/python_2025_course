@@ -1,28 +1,32 @@
 from typing import List
 
-nums: List[int] = [1, 8, 6, 2, 5, 4, 8, 3, 7]
-#                  |                        |
-# result = 49
+def area(left: int, right: int, h1: int, h2: int) -> int:
+    return min(h1, h2) * (right - left)
 
 
-def area(h1: int, h2: int, p1: int, p2: int) -> int:
-    return min(h1, h2) * (p2 - p1)
 
 
-def max_area(h: List[int]) -> int:
-    p1, p2 = 0, len(h) - 1
-    max_area = area(h[p1], h[p2], p1, p2)
+def solution(array: List[int]) -> int:
+    left: int = 0
+    right: int = len(array) - 1
+    max_area: int = 0
 
-    while abs(p1 - p2) >= 1:
-        if h[p1] > h[p2]:
-            p2 -= 1
+    while left <= right:
+        current: int = area(left, right, array[left], array[right])
+        if current > max_area:
+            max_area = current
+        
+        if array[left] >= array[right]:
+            right -= 1
         else:
-            p1 += 1
+            left += 1
 
-        cur_area = area(h[p1], h[p2], p1, p2)
-        if max_area < cur_area:
-            max_area = cur_area
     return max_area
 
+def main() -> None:
+    input: List[int] = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+    print("Input:", *input)
+    print(f"Output: {solution(input)}")
 
-print(max_area(nums))
+if __name__ == "__main__":
+    main()
