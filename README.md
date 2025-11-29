@@ -1,6 +1,6 @@
-Example of add and use pre-commit
+# Example of add and use pre-commit
 
-```
+```shell
   541  poetry add  pre-commit  // install pre-commit package
   543  poetry run pre-commit install // setup for .pre-commit-config.yaml
 
